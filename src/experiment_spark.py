@@ -1,3 +1,4 @@
+import argparse
 import json
 import logging as log
 import time
@@ -16,8 +17,8 @@ MODE = "default"
 run_id = str(uuid.uuid4())
 
 log.info(f"start run - {ENGINE}-{MODE}: {run_id}")
-################## init ##################
 
+################## init ##################
 spark = (
     SparkSession.builder.appName("Dataframe Frameworks Showdown")
     .config("spark.executor.memory", "16g")
@@ -25,11 +26,18 @@ spark = (
     .getOrCreate()
 )
 
+### get input params ###
+parser = argparse.ArgumentParser()
+parser.add_argument("--trial_rows")
+args = parser.parse_args()
+trial_rows = int(args.trial_rows)
+
+log.info(f"trial_rows: {trial_rows}")
+
 start_time = time.time()  # start timer
 
-
 ################## main ##################
-df = spark.read.parquet("data/nyc-trip-data")
+df = spark.read.parquet("data/nyc-trip-data").limit(trial_rows)
 
 grains = ["year", "month"]
 

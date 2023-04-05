@@ -8,11 +8,11 @@ duckdb = "*"
 pandas = "*"
 polars = "*"
 pyspark = "*"
+seaborn = "*"
 
 [dev-packages]
 jupyter-black = "*"
 jupyterlab = "*"
-jupyterlab-tabnine = "*"
 
 [requires]
 python_version = "3.10"

@@ -18,6 +18,11 @@ query: filter by percentiles + groupby
 | spark     | default   |
 | spark     | optimized |
 
+## Compute specs
+
+- CPU: M1 `MacBook Air (M1, 2020)`
+- RAM: 16GB
+
 ## Data source
 
 See [here](src/utils/download_dataset.sh).
@@ -32,4 +37,7 @@ See [here](src/utils/download_dataset.sh).
 ```bash
 # download data
 make download-data
+
+# run experiments
+make run
 ```

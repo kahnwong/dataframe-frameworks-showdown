@@ -1,5 +1,9 @@
 # python
 .ipynb_checkpoints/
+*.ipynb
 
 # data
 data/
+
+# project
+run.sh
