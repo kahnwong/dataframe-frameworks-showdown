@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "7963e83b2a4293890a33ad54107a0a7338d9ae22905088fe0ee6118e31a2bf10"
+            "sha256": "291d0fa88bc9ab48f257484f62436eb2d908e5a0f8dbc04b45ea2fd90e5ed9b9"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -1021,6 +1021,14 @@
             ],
             "markers": "python_version >= '3.7'",
             "version": "==0.8.0"
+        },
+        "jupyter-tabnine": {
+            "hashes": [
+                "sha256:0a49f0f64f71e0a892c260a089fd0b32e8b5a6ac4f3c3125345c3fe38ed5880d",
+                "sha256:f066e6bbc5a25cf5390849bf82359356a532a2d170dd388d2aaa7b3dfa838308"
+            ],
+            "index": "pypi",
+            "version": "==1.2.3"
         },
         "jupyter-ydoc": {
             "hashes": [

@@ -11,12 +11,17 @@
 
 query: filter by percentiles + groupby
 
-| framework | mode      |
-| --------- | --------- |
-| polars    | default   |
-| duckdb    | default   |
-| spark     | default   |
-| spark     | optimized |
+| framework | mode      | remarks                                          |
+| --------- | --------- | ------------------------------------------------ |
+| polars    | lazy      | by default, pandas does not operate in lazy mode |
+| duckdb    | default   |                                                  |
+| spark     | default   |                                                  |
+| spark-sql | default   |                                                  |
+| spark     | optimized |                                                  |
+
+<!-- ### Remarks - polars
+
+- RAM usage got ridiculously high (`24GB` and climbing) at `10,000,000 rows` -->
 
 ## Compute specs
 

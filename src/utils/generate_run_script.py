@@ -12,7 +12,10 @@ with open("run.sh", "w") as f:
     f.write("\n")
 
     for i in trial_rows:
-        f.write(f"pipenv run python3 src/experiment_spark.py --trial_rows {i}")
-        f.write("\n")
+        for framework in ["polars", "spark"]:
+            f.write(
+                f"pipenv run python3 src/experiment_{framework}.py --trial_rows {i}"
+            )
+            f.write("\n")
 
 print("Successfully created run script")

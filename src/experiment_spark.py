@@ -39,12 +39,23 @@ start_time = time.time()  # start timer
 ################## main ##################
 df = spark.read.parquet("data/nyc-trip-data").limit(trial_rows)
 
-grains = ["year", "month"]
 
-w = Window().partitionBy(grains).orderBy("trip_length_minute")
+w = Window().partitionBy("partition").orderBy("trip_length_minute")
 
 df_out = (
-    df
+    df.select(
+        [
+            "VendorID",
+            "payment_type",
+            "tpep_pickup_datetime",
+            "tpep_dropoff_datetime",
+            "passenger_count",
+            "trip_distance",
+            "total_amount",
+        ]
+    )
+    #### create dummy partition column####
+    .withColumn("partition", F.lit("dummy"))
     #### create trip_length_minute ####
     .withColumn(
         "tpep_pickup_datetime",
@@ -67,8 +78,7 @@ df_out = (
     .where(col("trip_length_minute_percentile").between(0.2, 0.8))
     #### aggregate ####
     .groupBy(
-        *grains
-        + [
+        [
             "VendorID",
             "payment_type",
         ]
@@ -101,7 +111,7 @@ with open("data/runs.json", "a") as f:
         "engine": ENGINE,
         "mode": MODE,
         "duration": elapsed_time,
-        "processed_rows": df.count(),
+        "processed_rows": trial_rows,
         "uuid": run_id,
     }
 
