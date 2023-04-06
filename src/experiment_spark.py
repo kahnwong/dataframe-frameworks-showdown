@@ -4,6 +4,7 @@ import logging as log
 import time
 import uuid
 
+import psutil
 import pyspark.sql.functions as F
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col
@@ -12,11 +13,11 @@ from pyspark.sql.window import Window
 log.basicConfig(format="%(asctime)s - [%(levelname)s] %(message)s", level=log.INFO)
 
 ################## metadata ##################
+RUN_ID = str(uuid.uuid4())
 ENGINE = "spark"
 MODE = "default"
-run_id = str(uuid.uuid4())
 
-log.info(f"start run - {ENGINE}-{MODE}: {run_id}")
+log.info(f"start run - {ENGINE}-{MODE}: {RUN_ID}")
 
 ################## init ##################
 spark = (
@@ -37,8 +38,7 @@ log.info(f"trial_rows: {trial_rows}")
 start_time = time.time()  # start timer
 
 ################## main ##################
-df = spark.read.parquet("data/nyc-trip-data").limit(trial_rows)
-
+df = spark.read.parquet("data/input/nyc-trip-data").limit(trial_rows)
 
 w = Window().partitionBy("partition").orderBy("trip_length_minute")
 
@@ -108,11 +108,12 @@ log.info(f"Elapsed time was {elapsed_time} seconds")
 ################## logging ##################
 with open("data/runs.json", "a") as f:
     r = {
+        "uuid": RUN_ID,
         "engine": ENGINE,
         "mode": MODE,
-        "duration": elapsed_time,
         "processed_rows": trial_rows,
-        "uuid": run_id,
+        "duration": elapsed_time,
+        "swap_usage": psutil.swap_memory().total,
     }
 
     f.write(json.dumps(r))

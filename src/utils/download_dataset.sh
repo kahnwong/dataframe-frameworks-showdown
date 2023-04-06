@@ -6,7 +6,7 @@
 
 for year in $(seq -w 2012 2022); do
 	for month in $(seq -w 1 12); do
-		download_dir="data/nyc-trip-data/year=$year/month=$month"
+		download_dir="data/nyc-trip-data/raw/year=$year/month=$month"
 		mkdir -p "$download_dir"
 
 		download_url="https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_$year-$month.parquet"

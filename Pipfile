@@ -9,6 +9,7 @@ pandas = "*"
 polars = "*"
 pyspark = "*"
 seaborn = "*"
+tqdm = "*"
 
 [dev-packages]
 jupyter-black = "*"
