@@ -11,12 +11,11 @@
 
 query: filter by percentiles + groupby
 
-| framework | mode    | remarks                                          | status |
-| --------- | ------- | ------------------------------------------------ | ------ |
-| polars    | lazy    | by default, polars does not operate in lazy mode | x      |
-| duckdb    | default |                                                  |        |
-| spark     | default |                                                  | x      |
-| spark-sql | default |                                                  |        |
+| framework | mode    | remarks                                          |
+| --------- | ------- | ------------------------------------------------ |
+| polars    | lazy    | by default, polars does not operate in lazy mode |
+| duckdb    | default | -                                                |
+| spark     | default | -                                                |
 
 - RAM usage got ridiculously high (`24GB` and climbing) at `10,000,000 rows` -->
 

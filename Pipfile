@@ -4,13 +4,13 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-duckdb = "*"
-pandas = "*"
-polars = "*"
-pyspark = "*"
-seaborn = "*"
+duckdb = "==0.7.1"
+pandas = "==2.0.0"
+polars = "==0.16.18"
+pyarrow = "==11.0.0"
+pyspark = "==3.3.2"
+seaborn = "==0.12.2"
 tqdm = "*"
-pyarrow = "*"
 
 [dev-packages]
 jupyter-black = "*"
