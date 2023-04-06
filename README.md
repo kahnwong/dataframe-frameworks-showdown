@@ -49,6 +49,6 @@ make run
 
 ## Results
 
-- `duckdb` crash/unrespond at 120,000,000 records (task terminated by user at 14 minute)
+- `duckdb` crash/unrespond at 30M rows (task terminated by user at 14 minute).
 
 ![result](images/result.png)
