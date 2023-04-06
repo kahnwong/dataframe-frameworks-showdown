@@ -9,6 +9,8 @@
 
 ## Experiments
 
+Input data (of varying row count, to measure performance against same partition size but different length) is equally partitioned into 8 chunks.
+
 1. Create a timestamp diff column `trip_length_minute`, converted to minute
 2. Create percentile on `trip_length_minute` as `trip_length_minute_percentile`
 3. Filter only `trip_length_minute_percentile` between (0.2, 0.8)
