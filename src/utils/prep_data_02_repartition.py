@@ -35,6 +35,10 @@ trial_rows_base = [
 ]  # 100k, 500k, 1m, 5m, 10m
 trial_rows = trial_rows_base + list(range(step, capped_rows, step))
 
+"""
+hack: probably have to run in batch, if you notice
+spark is getting slower due to multiple loops
+"""
 partition_size = 8
 for limit in trial_rows:
     df.limit(limit).repartition(partition_size).write.parquet(

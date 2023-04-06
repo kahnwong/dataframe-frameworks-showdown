@@ -5,7 +5,7 @@
 - ~~pandas~~ (not present in the experiment, because it's very unrealistic to expect pandas to be able to open 15GB data on a 16GB RAM machine)
 - polars
 - duckdb
-- spark (single-node)
+- spark (single node)
 
 ## Experiments
 
@@ -35,7 +35,7 @@ See [here](src/utils/download_dataset.sh).
 - partitions: `year 2012` to `year 2022` (older partitions have different schema)
 - **dirty data**: some columns have mismatched data types across partitions
 
-These will be partitioned and used for experiments. See [here](src/utils/prep_data_01_cast_dtype.py) and [here](src/utils/prep_data_02_repartition.py)
+These will be partitioned and used for experiments. See [here](src/utils/prep_data_01_cast_dtype.py) and [here](src/utils/prep_data_02_repartition.py).
 
 ## Usage
 
@@ -46,3 +46,9 @@ make download-data
 # run experiments
 make run
 ```
+
+## Results
+
+- `duckdb` crash/unrespond at 120,000,000 records (task terminated by user at 14 minute)
+
+![result](images/result.png)
