@@ -87,14 +87,13 @@ df_out = (
     )
 )
 
-log.info(f"output rows: {len(df_out.collect())}")  # trigger spark actions
+log.info(f"output rows: {len(df_out.collect())}")  # trigger actions
 end_time = time.time()  # end timer
 
 elapsed_time = end_time - start_time
 log.info(f"Elapsed time was {elapsed_time} seconds")
 
 ################## logging ##################
-
 with open("data/runs.json", "a") as f:
     r = {
         "uuid": RUN_ID,

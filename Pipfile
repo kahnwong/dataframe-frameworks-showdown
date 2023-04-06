@@ -10,6 +10,7 @@ polars = "*"
 pyspark = "*"
 seaborn = "*"
 tqdm = "*"
+pyarrow = "*"
 
 [dev-packages]
 jupyter-black = "*"

@@ -99,7 +99,7 @@ df_out = (
     )
 )
 
-log.info(f"output rows: {df_out.count()}")  # trigger spark actions
+log.info(f"output rows: {df_out.count()}")  # trigger actions
 end_time = time.time()  # end timer
 
 elapsed_time = end_time - start_time
