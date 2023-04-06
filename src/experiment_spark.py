@@ -29,16 +29,17 @@ spark = (
 
 ### get input params ###
 parser = argparse.ArgumentParser()
-parser.add_argument("--trial_rows")
+parser.add_argument("--input_path")
 args = parser.parse_args()
-trial_rows = int(args.trial_rows)
+input_path = args.input_path
 
+trial_rows = int(input_path.split("=")[-1])
 log.info(f"trial_rows: {trial_rows}")
 
 start_time = time.time()  # start timer
 
 ################## main ##################
-df = spark.read.parquet("data/input/nyc-trip-data").limit(trial_rows)
+df = spark.read.parquet(input_path)
 
 w = Window().partitionBy("partition").orderBy("trip_length_minute")
 

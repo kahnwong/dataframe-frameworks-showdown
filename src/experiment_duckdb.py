@@ -20,17 +20,17 @@ log.info(f"start run - {ENGINE}-{MODE}: {RUN_ID}")
 ################## init ##################
 ### get input params ###
 parser = argparse.ArgumentParser()
-parser.add_argument("--trial_rows")
+parser.add_argument("--input_path")
 args = parser.parse_args()
-trial_rows = int(args.trial_rows)
+input_path = args.input_path
 
+trial_rows = int(input_path.split("=")[-1])
 log.info(f"trial_rows: {trial_rows}")
 
 start_time = time.time()  # start timer
 
 ################## main ##################
-path = "data/prep/nyc-trip-data/part-00003-f6a895f0-23e3-4aaa-a731-dff7e37be1a2-c000.snappy.parquet"  # large
-# path = 'data/prep/nyc-trip-data/part-00003-fa42da38-f364-4099-9725-a119a1f65de8-c000.snappy.parquet' # small
+path = f"{input_path}/*.parquet"
 
 df = duckdb.sql(
     f"""

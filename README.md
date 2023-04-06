@@ -9,15 +9,17 @@
 
 ## Experiments
 
-query: filter by percentiles + groupby
+1. Calculate a timestamp diff column `trip_length_minute`, converted to minute
+2. Create percentile on `trip_length_minute` as `trip_length_minute_percentile`
+3. Filter only `trip_length_minute_percentile` between (0.2, 0.8)
+4. Group by on `VendorID`, `payment_type`
+5. Aggregate min, max, avg on `passenger_count`, `trip_distance`, `total_amount`
 
 | framework | mode    | remarks                                          |
 | --------- | ------- | ------------------------------------------------ |
 | polars    | lazy    | by default, polars does not operate in lazy mode |
 | duckdb    | default | -                                                |
 | spark     | default | -                                                |
-
-- RAM usage got ridiculously high (`24GB` and climbing) at `10,000,000 rows` -->
 
 ## Compute specs
 
@@ -32,6 +34,8 @@ See [here](src/utils/download_dataset.sh).
 - total records: `1,195,313,202 - around 1200 million rows`
 - partitions: `year 2012` to `year 2022` (older partitions have different schema)
 - **dirty data**: some columns have mismatched data types across partitions
+
+These will be partitioned and used for experiments. See [here](src/utils/prep_data_01_cast_dtype.py) and [here](src/utils/prep_data_02_repartition.py)
 
 ## Usage
 

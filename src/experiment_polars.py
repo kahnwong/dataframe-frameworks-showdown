@@ -22,19 +22,17 @@ log.info(f"start run - {ENGINE}-{MODE}: {RUN_ID}")
 ################## init ##################
 ### get input params ###
 parser = argparse.ArgumentParser()
-parser.add_argument("--trial_rows")
+parser.add_argument("--input_path")
 args = parser.parse_args()
-trial_rows = int(args.trial_rows)
+input_path = args.input_path
 
+trial_rows = int(input_path.split("=")[-1])
 log.info(f"trial_rows: {trial_rows}")
 
 start_time = time.time()  # start timer
 
 ################## main ##################
-df = ps.scan_parquet(
-    "data/input/nyc-trip-data/*.parquet",
-    n_rows=trial_rows,
-)
+df = ps.scan_parquet(f"{input_path}/*.parquet")
 
 df_out = (
     df.select(
