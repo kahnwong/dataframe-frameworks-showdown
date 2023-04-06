@@ -9,7 +9,7 @@
 
 ## Experiments
 
-1. Calculate a timestamp diff column `trip_length_minute`, converted to minute
+1. Create a timestamp diff column `trip_length_minute`, converted to minute
 2. Create percentile on `trip_length_minute` as `trip_length_minute_percentile`
 3. Filter only `trip_length_minute_percentile` between (0.2, 0.8)
 4. Group by on `VendorID`, `payment_type`
