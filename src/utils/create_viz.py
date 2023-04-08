@@ -34,17 +34,17 @@ palette = {
 }
 
 fig, ax1 = plt.subplots()
+fig.set_size_inches(10, 5)
 ax2 = ax1.twinx()
 
 
 sns.barplot(data=df, x="processed_rows", y="duration", hue="engine", ax=ax1)
-ax1.set_xticklabels(labels="processed_rows", rotation=45)
 ax1.set_title("Dataframe frameworks performance")
 ax1.set_xlabel("Rows (in millions)")
 ax1.set_ylabel("Bar: Duration (in seconds)")
 
 sns.pointplot(data=df, x="processed_rows", y="swap_usage", hue="engine", ax=ax2)
-ax2.set_ylabel("Point: Swap Usage (in GB)")
+ax2.set_ylabel("Line: Swap Usage (in GB)")
 
 
 os.makedirs("images", exist_ok=True)
