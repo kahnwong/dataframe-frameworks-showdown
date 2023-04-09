@@ -41,8 +41,9 @@ spark is getting slower due to multiple loops
 """
 partition_size = 8
 for limit in trial_rows:
+    log.info(f"Writing df of {limit} rows...")
     df.limit(limit).repartition(partition_size).write.parquet(
-        f"data/input/nyc-trip-data/limit={limit}", mode="overwrite"
+        f"data/input/ex1/nyc-trip-data/limit={limit}", mode="overwrite"
     )
 
 log.info("Successfully repartitioned dataframe for experiment")

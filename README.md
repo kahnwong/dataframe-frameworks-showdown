@@ -37,7 +37,7 @@ See [here](src/utils/download_dataset.sh).
 - partitions: `year 2012` to `year 2022` (older partitions have different schema)
 - **dirty data**: some columns have mismatched data types across partitions
 
-These will be partitioned and used for experiments. See [here](src/utils/prep_data_01_cast_dtype.py) and [here](src/utils/prep_data_02_repartition.py).
+These will be partitioned and used for experiments. See `prep` stage in `Makefile`.
 
 ## Usage
 
@@ -45,11 +45,11 @@ These will be partitioned and used for experiments. See [here](src/utils/prep_da
 # download data
 make download-data
 
-# prep data
-make prep
+# run experiment 1: window on single partition
+make run-ex1-window-on-single-partition
 
-# run experiments
-make run
+# create visualization
+make visualize
 ```
 
 ## Results
