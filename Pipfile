@@ -11,6 +11,7 @@ pyarrow = "==11.0.0"
 pyspark = "==3.3.2"
 seaborn = "==0.12.2"
 tqdm = "*"
+psutil = "*"
 
 [dev-packages]
 jupyter-black = "*"
