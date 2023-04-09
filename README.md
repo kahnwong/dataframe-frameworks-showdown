@@ -45,6 +45,9 @@ These will be partitioned and used for experiments. See [here](src/utils/prep_da
 # download data
 make download-data
 
+# prep data
+make prep
+
 # run experiments
 make run
 ```
