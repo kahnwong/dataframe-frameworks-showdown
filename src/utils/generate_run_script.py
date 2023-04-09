@@ -1,6 +1,6 @@
 import glob
 
-paths = glob.glob("data/input/ex1/nyc-trip-data/*", recursive=True)
+paths = glob.glob("data/input/expt1/nyc-trip-data/*", recursive=True)
 
 with open("run.sh", "w") as f:
     f.write("#!/bin/bash")

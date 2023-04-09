@@ -46,7 +46,7 @@ These will be partitioned and used for experiments. See `prep` stage in `Makefil
 make download-data
 
 # run experiment 1: window on single partition
-make run-ex1-window-on-single-partition
+make run-expt1-window-on-single-partition
 
 # create visualization
 make visualize
