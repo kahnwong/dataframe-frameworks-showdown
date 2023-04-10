@@ -1,5 +1,7 @@
 # Dataframe Frameworks Showdown
 
+Blog post at <https://www.karnwong.me/posts/2023/04/duckdb-vs-polars-vs-spark/>
+
 ## Frameworks Used
 
 - ~~pandas~~ (not present in the experiment, because it's very unrealistic to expect pandas to be able to open 15GB data on a 16GB RAM machine)
@@ -51,10 +53,15 @@ make prep-base
 # run experiment 1: window on single partition
 # contains prep, run and visualize
 make run-expt1-window-on-single-partition
+
+# run experiment 2: window on multiple partitions
+make run-expt2-window-on-multiple-partition
 ```
 
 ## Results
 
 - `duckdb` crash/unrespond at 30M rows (task terminated by user at 14 minute).
 
-![result](images/result_expt1.png)
+![result expt1](images/result_expt1.png)
+
+![result expt2](images/result_expt2.png)

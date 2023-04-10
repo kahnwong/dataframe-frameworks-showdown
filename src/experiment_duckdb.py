@@ -13,9 +13,6 @@ log.basicConfig(format="%(asctime)s - [%(levelname)s] %(message)s", level=log.IN
 ################## metadata ##################
 RUN_ID = str(uuid.uuid4())
 ENGINE = "duckdb"
-MODE = "default"
-
-log.info(f"start run - {ENGINE}-{MODE}: {RUN_ID}")
 
 ################## init ##################
 ### get input params ###
@@ -32,9 +29,14 @@ if experiment_id == 1:
 
     partitions = ",".join(["partition"])
     log.info(f"partitions: {partitions}")
-elif experiment_id == 2:
+elif experiment_id == 21:
+    partitions = ",".join(["partition"])
+    log.info(f"partitions: {partitions}")
+elif experiment_id == 22:
     partitions = ",".join(["year", "month"])
     log.info(f"partitions: {partitions}")
+
+log.info(f"start run - {ENGINE}-EXPT{experiment_id}: {RUN_ID}")
 
 start_time = time.time()  # start timer
 
@@ -91,13 +93,17 @@ with open("data/runs.json", "a") as f:
         "uuid": RUN_ID,
         "experiment_id": experiment_id,
         "engine": ENGINE,
-        "mode": MODE,
         "duration": elapsed_time,
         "swap_usage": psutil.swap_memory().total,
     }
 
     if experiment_id == 1:
         r["processed_rows"] = trial_rows
+        r["mode"] = "default"
+    elif experiment_id == 21:
+        r["mode"] = "single-key partition"
+    elif experiment_id == 22:
+        r["mode"] = "multi-key partition"
 
     f.write(json.dumps(r))
     f.write("\n")

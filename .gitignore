@@ -7,3 +7,6 @@ data/
 
 # project
 run.sh
+
+# duckdb
+.tmp/
