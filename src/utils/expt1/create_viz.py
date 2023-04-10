@@ -1,16 +1,23 @@
+import logging as log
 import os
 
 import polars as pl
 import seaborn as sns
 from matplotlib import pyplot as plt
 
+log.basicConfig(format="%(asctime)s - [%(levelname)s] %(message)s", level=log.INFO)
+
 ### prep data ###
 df = pl.read_ndjson("data/runs.json")
 
 # in case multiple experiments with same run parameters are present
-df = df.groupby(["engine", "mode", "processed_rows"]).agg(
-    pl.col("duration").mean().alias("duration"),
-    pl.col("swap_usage").mean().alias("swap_usage"),
+df = (
+    df.filter(pl.col("experiment_id") == 1)
+    .groupby(["engine", "mode", "processed_rows"])
+    .agg(
+        pl.col("duration").mean().alias("duration"),
+        pl.col("swap_usage").mean().alias("swap_usage"),
+    )
 )
 
 # remove a run against full dataset
@@ -49,3 +56,5 @@ ax2.set_ylabel("Line: Swap Usage (in GB)")
 
 os.makedirs("images", exist_ok=True)
 fig.savefig("images/result.png")
+
+log.info("Successfully visualized experiment 1")

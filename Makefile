@@ -8,6 +8,6 @@ prep-base:
 
 run-expt1-window-on-single-partition:
 	pipenv run python3 src/utils/expt1/prep_data.py
-	pipenv run python3 src/utils/generate_run_script.py
+	pipenv run python3 src/utils/expt1/generate_run_script.py
 	bash run.sh
 	pipenv run python3 src/utils/expt1/create_viz.py

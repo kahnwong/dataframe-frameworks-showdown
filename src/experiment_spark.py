@@ -30,22 +30,35 @@ spark = (
 ### get input params ###
 parser = argparse.ArgumentParser()
 parser.add_argument("--input_path")
+parser.add_argument("--experiment_id")
 args = parser.parse_args()
 input_path = args.input_path
+experiment_id = int(args.experiment_id)
 
-trial_rows = int(input_path.split("=")[-1])
-log.info(f"trial_rows: {trial_rows}")
+if experiment_id == 1:
+    trial_rows = int(input_path.split("=")[-1])
+    log.info(f"trial_rows: {trial_rows}")
+
+    partitions = ["partition"]
+    log.info(f"partitions: {partitions}")
+elif experiment_id == 2:
+    partitions = ["year", "month"]
+    log.info(f"partitions: {partitions}")
 
 start_time = time.time()  # start timer
 
 ################## main ##################
 df = spark.read.parquet(input_path)
 
-w = Window().partitionBy("partition").orderBy("trip_length_minute")
+w = Window().partitionBy(*partitions).orderBy("trip_length_minute")
 
 df_out = (
-    df.select(
-        [
+    df
+    #### create dummy partition column####
+    .withColumn("partition", F.lit("dummy"))
+    .select(
+        partitions
+        + [
             "VendorID",
             "payment_type",
             "tpep_pickup_datetime",
@@ -55,8 +68,6 @@ df_out = (
             "total_amount",
         ]
     )
-    #### create dummy partition column####
-    .withColumn("partition", F.lit("dummy"))
     #### create trip_length_minute ####
     .withColumn(
         "tpep_pickup_datetime",
@@ -79,7 +90,8 @@ df_out = (
     .where(col("trip_length_minute_percentile").between(0.2, 0.8))
     #### aggregate ####
     .groupBy(
-        [
+        partitions
+        + [
             "VendorID",
             "payment_type",
         ]
@@ -110,12 +122,15 @@ log.info(f"Elapsed time was {elapsed_time} seconds")
 with open("data/runs.json", "a") as f:
     r = {
         "uuid": RUN_ID,
+        "experiment_id": experiment_id,
         "engine": ENGINE,
         "mode": MODE,
-        "processed_rows": trial_rows,
         "duration": elapsed_time,
         "swap_usage": psutil.swap_memory().total,
     }
+
+    if experiment_id == 1:
+        r["processed_rows"] = trial_rows
 
     f.write(json.dumps(r))
     f.write("\n")
