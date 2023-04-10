@@ -46,7 +46,7 @@ ax2 = ax1.twinx()
 
 
 sns.barplot(data=df, x="processed_rows", y="duration", hue="engine", ax=ax1)
-ax1.set_title("Dataframe frameworks performance")
+ax1.set_title("Dataframe frameworks performance: EXPT 1 - single-key partition")
 ax1.set_xlabel("Rows (in millions)")
 ax1.set_ylabel("Bar: Duration (in seconds)")
 
@@ -55,6 +55,6 @@ ax2.set_ylabel("Line: Swap Usage (in GB)")
 
 
 os.makedirs("images", exist_ok=True)
-fig.savefig("images/result.png")
+fig.savefig("images/result_expt1.png")
 
 log.info("Successfully visualized experiment 1")
