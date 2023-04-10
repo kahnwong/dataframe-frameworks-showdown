@@ -45,11 +45,12 @@ These will be partitioned and used for experiments. See `prep` stage in `Makefil
 # download data
 make download-data
 
-# run experiment 1: window on single partition
-make run-expt1-window-on-single-partition
+# sanitize data
+make prep-base
 
-# create visualization
-make visualize
+# run experiment 1: window on single partition
+# contains prep, run and visualize
+make run-expt1-window-on-single-partition
 ```
 
 ## Results

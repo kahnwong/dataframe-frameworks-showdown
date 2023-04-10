@@ -6,11 +6,8 @@ prep-base:
 		pipenv run python3 src/utils/prep_data_base_cast_dtype.py; \
 	fi
 
-prep-expt1: prep-base
-	pipenv run python3 src/utils/prep_data_expt1.py
-run-expt1-window-on-single-partition: prep_expt1
+run-expt1-window-on-single-partition:
+	pipenv run python3 src/utils/expt1/prep_data.py
 	pipenv run python3 src/utils/generate_run_script.py
 	bash run.sh
-
-visualize:
-	pipenv run python3 src/utils/create_viz.py
+	pipenv run python3 src/utils/expt1/create_viz.py

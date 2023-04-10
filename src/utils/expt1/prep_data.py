@@ -40,7 +40,7 @@ hack: probably have to run in batch, if you notice
 spark is getting slower due to multiple loops
 """
 partition_size = 8
-for limit in trial_rows:
+for limit in trial_rows[:2]:
     log.info(f"Writing df of {limit} rows...")
     df.limit(limit).repartition(partition_size).write.parquet(
         f"data/input/expt1/nyc-trip-data/limit={limit}", mode="overwrite"
